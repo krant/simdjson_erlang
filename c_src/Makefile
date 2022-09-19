@@ -29,9 +29,9 @@ else ifeq ($(UNAME_SYS), FreeBSD)
 	CXXFLAGS ?= -O3 -mavx2 -finline-functions -Wall -std=c++17 
 else ifeq ($(UNAME_SYS), Linux)
 	CC ?= gcc
-	CFLAGS ?= -O3 -mavx2 -std=c99 -finline-functions -Wall -Wmissing-prototypes
+	CFLAGS ?= -O3 -march sandybridge -std=c99 -flto -finline-functions -Wall -Wmissing-prototypes
 	CXX = g++
-	CXXFLAGS ?= -O3 -mavx2 -finline-functions -Wall -std=c++17 
+	CXXFLAGS ?= -O3 -march sandybridge -flto -finline-functions -Wall -std=c++17
 endif
 
 CFLAGS += -fPIC -I $(ERTS_INCLUDE_DIR) -I $(ERL_INTERFACE_INCLUDE_DIR)
