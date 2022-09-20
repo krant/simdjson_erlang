@@ -32,8 +32,9 @@ static ERL_NIF_TERM makeErl(ErlNifEnv *env, simdjson::dom::element &elm) {
 			}
 			//auto m = enif_make_new_map(env);
 			//enif_make_map_from_arrays(env, ks.data(), vs.data(), ks.size(), &m);
-			auto m = enif_make_list_from_array(env, vs.data(), vs.size());
-			return m;
+			auto l = enif_make_list_from_array(env, vs.data(), vs.size());
+			auto t = enif_make_tuple1(env, l);
+			return t;
 		}
 		case dom::element_type::STRING: {
 			ErlNifBinary bin;
