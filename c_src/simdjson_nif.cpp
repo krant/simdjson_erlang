@@ -27,12 +27,12 @@ static ERL_NIF_TERM makeErl(ErlNifEnv *env, simdjson::dom::element &elm) {
 				memcpy(bin.data, str.data(), str.length());
 				auto k = enif_make_binary(env, &bin);	
 				ks.push_back(k);
-				vs.push_back(makeErl(env, field.value));
-				//vs.push_back(enif_make_tuple2(env, k, makeErl(env, field.value)));
+				//vs.push_back(makeErl(env, field.value));
+				vs.push_back(enif_make_tuple2(env, k, makeErl(env, field.value)));
 			}
-			auto m = enif_make_new_map(env);
-			enif_make_map_from_arrays(env, ks.data(), vs.data(), ks.size(), &m);
-			//auto m = enif_make_list_from_array(env, vs.data(), vs.size());
+			//auto m = enif_make_new_map(env);
+			//enif_make_map_from_arrays(env, ks.data(), vs.data(), ks.size(), &m);
+			auto m = enif_make_list_from_array(env, vs.data(), vs.size());
 			return m;
 		}
 		case dom::element_type::STRING: {
